@@ -35,6 +35,6 @@ class Admin::ProductsController < ApplicationController
       :image,
       :price
     )
-  end
+  end 
 
 end
