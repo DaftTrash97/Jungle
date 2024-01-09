@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'users/new', to: 'users#new', as: 'new_user'
+  post 'users/create', to: 'users#create', as: 'create_user'
+  get 'users/login', to: 'users#login', as: 'login'
+  post 'users/login', to: 'users#login'
+  get 'users/logout', to: 'users#logout', as: 'logout'
+  get '/register', to: 'users#new', as: 'register'
+
 
   root to: 'products#index'
 
