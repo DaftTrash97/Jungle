@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'users/new'
+  get 'users/create'
+  get 'users/login'
+  get 'users/logout'
   root to: 'products#index'
 
   resources :products, only: [:index, :show]
