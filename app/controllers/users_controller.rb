@@ -15,14 +15,19 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(email: params[:email])
-
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect_to root_path, notice: 'Logged in successfully!'
-    else
-      flash.now[:alert] = 'Invalid email or password'
-      render :login
+    @user = User.new(email: params[:user]&.fetch(:email, nil))
+  
+    if request.post?
+      user = User.find_by(email: @user.email)
+  
+      if user && user.authenticate(params[:user]&.fetch(:password, nil))
+        session[:user_id] = user.id
+        redirect_to root_path, notice: 'Logged in successfully!'
+      else
+        flash.now[:alert] = 'Invalid email or password'
+        render :login
+      end
+    end
   end
 
   def logout
